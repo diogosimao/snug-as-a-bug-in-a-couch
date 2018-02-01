@@ -15,16 +15,21 @@ import environ
 
 
 root = environ.Path(__file__)
+
+# set default values and casting
 env = environ.Env(DEBUG=(bool, False),
+                  HIDE_DOCS=(bool, False),
                   SECRET_KEY=(str, ''),
                   DATABASE_URL=(str, ''),
-                  HIDE_DOCS=(bool, False))  # set default values and casting
+                  TMDB_API_KEY=(str, ''))
 
 BASE_DIR = (root - 2)()
 
 PROJECT_ROOT = (root - 1)()
 
 SECRET_KEY = env('SECRET_KEY')
+
+TMDB_API_KEY = env('TMDB_API_KEY')
 
 if not SECRET_KEY:
     # SECURITY WARNING: this should not and won't be used in production environment
@@ -39,7 +44,6 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.tmdb',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [

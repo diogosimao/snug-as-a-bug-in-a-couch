@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e7432ea3b7c7770adb6f79f75b43e83c90f3f40b5eed9d0134dfb7d5abe4d3cf"
+            "sha256": "c327e66e5e9249fcd079f8bc3a307dc7f8c52bd9e22fe597e6934cab512d283b"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -17,9 +17,7 @@
             "sys_platform": "linux"
         },
         "pipfile-spec": 6,
-        "requires": {
-            "python_version": "3.6"
-        },
+        "requires": {},
         "sources": [
             {
                 "name": "pypi",
@@ -35,6 +33,12 @@
                 "sha256:9614851d4a7ff8cbd32b73c6076441f377c45a5bbff7e771798fb02c43c31f47"
             ],
             "version": "==2.0"
+        },
+        "django-bootstrap3": {
+            "hashes": [
+                "sha256:9f56fa30a2c32142a2785148816cc4e14e7efc8699c5f87a8cb5be162a81658d"
+            ],
+            "version": "==9.1.0"
         },
         "django-environ": {
             "hashes": [

@@ -2,6 +2,7 @@
 #start development server on :8000
 
 export DEBUG=True
+export TMDB_API_KEY=YOUR_TMDB_API_KEY
 
 read -n1 -p "Run the app on Docker [D] or pipenv [P]: " choice
 case $choice in

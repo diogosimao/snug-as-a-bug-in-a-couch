@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Snug as a bug in a couch</title>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-md-4">
+                <form action="{% url 'tmdb:query' %}" method="post" enctype="multipart/form-data" class="form">
+                    {% csrf_token %}
+                    <p>
+                        {% bootstrap_form form %}
+                        <p>{% bootstrap_form_errors form layout='inline' %}
+                        </p>
+                        <p>
+                            {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
+                        </p>
+                    </p>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+        </div>
+    </body>
+</html>
