@@ -11,21 +11,33 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import environ
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
+root = environ.Path(__file__)
+env = environ.Env(DEBUG=(bool, False),
+                  SECRET_KEY=(str, ''),
+                  DATABASE_URL=(str, ''),
+                  HIDE_DOCS=(bool, False))  # set default values and casting
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm8q93k7!k*ix%$u#0$45y)h6*+*@708dp&&$5j9c&ai6=42pu+'
+BASE_DIR = (root - 2)()
+
+PROJECT_ROOT = (root - 1)()
+
+SECRET_KEY = env('SECRET_KEY')
+
+if not SECRET_KEY:
+    # SECURITY WARNING: this should not and won't be used in production environment
+    SECRET_KEY = 'm8q93k7!k*ix%$u#0$45y)h6*+*@708dp&&$5j9c&ai6=42pu+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+DATABASES = {
+    'default': env.db('DATABASE_URL'),
+}
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    '',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Brazil/East'
 
 USE_I18N = True
 
@@ -118,3 +131,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
