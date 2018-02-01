@@ -13,20 +13,21 @@ tmdb.API_KEY = settings.TMDB_API_KEY
 
 
 def query_view(request):
+    search = tmdb.Search()
+
+    form = QueryForm()
+    context = {'form': form}
+
     if request.method == 'POST':
         form = QueryForm(request.POST)
         if form.is_valid():
-            search = tmdb.Search()
             search_string = html.escape(form.data.get('search', ''))
             if form.data.get('choices', None):
                 response = search.movie(query=search_string, year='2018')
             else:
                 response = search.movie(query=search_string)
-            for s in search.results:
-                print(s['title'], s['id'], s['release_date'], s['popularity'])
-            return HttpResponseRedirect(reverse_lazy('tmdb:query'))
 
-    else:
-        form = QueryForm()
-        context = {'form': form}
-        return render(request, 'tmdb/query_list.html', context)
+            if search.results:
+                context['search_results'] = search.results
+    
+    return render(request, 'tmdb/query_list.html', context)

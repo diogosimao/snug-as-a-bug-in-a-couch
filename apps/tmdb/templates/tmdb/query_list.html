@@ -25,7 +25,17 @@
                     </p>
                 </form>
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                {% if search_results %}
+                    {% for result in search_results %}
+                        <label class="checkbox">
+                            <input type="checkbox" id={{ result.id }} value={{ result.id }}> {{ result.title }}
+                        </label>
+                    {% endfor %}
+                {% else %}
+                    <p>No movies.</p>
+                {% endif %}
+            </div>
             <div class="col-md-4"></div>
         </div>
     </body>
