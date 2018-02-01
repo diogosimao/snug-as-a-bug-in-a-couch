@@ -1,7 +1,7 @@
 SnugAsABugInACouch
 =====================================================
 
-There are two options to setup and run the app. You can either choose to setup the Docker environment or run it via `pipenv` (virtualenv like system). In both options you must have the 'stack' installed. 
+There are two options to setup and run the app. You can either choose to setup the Docker (ToDo) environment or run it via `pipenv` (virtualenv like system). In both options you must have the 'stack' installed. 
 
 Stack
 =============
@@ -25,7 +25,7 @@ Docker setup requirements
 Run the app
 ===========
 
-1. Git clone this [repo](https://github.com/diogosimao/snugasabuginacouch.git). 
+1. Git clone this [repo](https://github.com/diogosimao/snug-as-a-bug-in-a-couch.git). 
     
     $ git clone https://github.com/diogosimao/snugasabuginacouch.git && cd snugasabuginacouch
 
