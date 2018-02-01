@@ -9,7 +9,7 @@ case $choice in
   d|D) printf "\nWet to be done...\n";;
   p|P) printf "\nRunning on pipenv...\n "
     pip install -r requirements.txt
-    export DATABASE_URL=sqlite:////tmp/invoicer-tmp-sqlite.db
+    export DATABASE_URL=sqlite:////tmp/snugasabuginacouch-tmp-sqlite.db
     python manage.py makemigrations
     python manage.py migrate
     python manage.py runserver ;;
