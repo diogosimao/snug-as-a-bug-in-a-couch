@@ -9,36 +9,152 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Snug as a bug in a couch</title>
+        <style type="text/css">
+            @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+            h1, h2, h3, h4 {
+              font-family: 'Lato', sans-serif;
+              font-weight: 300;
+            }
+            p {
+              font-family: 'Lato', sans-serif;
+            }
+            html {
+              background-color: #474747;
+            }
+            .top {
+              background-color: #474747;
+            }
+            .top .navbar-brand {
+              height: 50px;
+              line-height: 50px;
+              text-align: center;
+              padding: 0 10px;
+              background-color: #CCC;
+              color: #474747;
+              text-decoration: none;
+            }
+            .top .container {
+              padding: 0;
+            }
+            .banner {
+              background-color: #373737;
+            }
+            .banner .container {
+              background-color: #009b9b;
+              min-height: 200px;
+              padding: 40px 30px 30px 40px;
+            }
+            .banner .container p {
+              font-size: 22px;
+              padding-left: 5px;
+              font-weight: 300;
+            }
+            .middle {
+              background-color: #CCC;
+            }
+            .middle .container {
+              background-color: #FFF;
+              min-height: 300px;
+              padding-bottom: 20px;
+            }
+            .navbar-nav li a {
+              color: #CCC;
+              font-family: 'Lato', sans-serif;
+            }
+            .navbar-nav li a:hover {
+              background-color: #373737;
+            }
+            .bottom {
+              background-color: #474747;
+            }
+            .bottom .container {
+              background-color: #373737;
+              min-height: 150px;
+            }
+            .bottom .container h3 {
+              color: #999;
+            }
+            .bottom .container p {
+              color: #666;
+            }
+            .navbar-toggle {
+              color: #009b9b;
+              font-size: 32px;
+              margin: 3px;
+              padding: 2px 5px;
+              line-height: 32px;
+            }
+            .navbar-toggle:hover {
+              background-color: #373737;
+            }
+            .navbar-nav {
+              margin: 0;
+            }
+            .content p {
+              line-height: 30px;
+              font-size: 16px;
+            }
+    </style>
     </head>
     <body>
-        <div class="container">
-            <h1>Search</h1>
-            <div class="row">
-                <div class="col-md-4">
-                    <form action="{% url 'tmdb:manager' %}" method="post" enctype="multipart/form-data" class="form">
-                        {% csrf_token %}
-                        {% bootstrap_field form.filters_choices %}
-                        {% bootstrap_field form.search placeholder='Search for movies you wanna add' %}
+        <header class="top" role="header">
+          <div class="container">
+            <a href="#" class="navbar-brand pull-left">SAABIAC</a>
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="glyphicon glyphicon-align-justify"></span>
+            </button>
+            <nav class="navbar-collapse collapse" role="navigation">
+              <ul class="navbar-nav nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+        <div class="banner">
+          <div class="container">
+            <h1>Movie list manager</h1>
+          </div>
+        </div>
+        <div class="middle">
+            <div class="container">
+                <h1>Search</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <form action="{% url 'tmdb:manager' %}" method="post" enctype="multipart/form-data" class="form">
+                            {% csrf_token %}
+                            {% bootstrap_field form.filters_choices %}
+                            {% bootstrap_field form.search placeholder='Search for movies you wanna add' %}
 
-                        {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
-                    </form>
-                        {% bootstrap_form_errors form layout='inline' %}
+                            {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
+                        </form>
+                            {% bootstrap_form_errors form layout='inline' %}
+                    </div>
+                </div>
+                <h1>Choose</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <form action="{% url 'tmdb:check' %}" method="post" enctype="multipart/form-data" class="form">
+                            {% csrf_token %}
+                            {% bootstrap_form choices_form %}
+
+                            {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
+                            {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
+                        </form>
+                            {% bootstrap_form_errors form layout='inline' %}
+                    </div>
                 </div>
             </div>
-            <h1>Choose</h1>
-            <div class="row">
-                <div class="col-md-4">
-                    <form action="{% url 'tmdb:check' %}" method="post" enctype="multipart/form-data" class="form">
-                        {% csrf_token %}
-                        {% bootstrap_form choices_form %}
-
-                        {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
-                        {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
-                    </form>
-                        {% bootstrap_form_errors form layout='inline' %}
-                </div>
+        </div>
+        <div class="bottom">
+          <div class="container">
+            <div class="col-md-4">
+              <h3><span class="glyphicon glyphicon-heart"></span> Made with love</h3>
             </div>
+          </div>
         </div>
     </body>
 </html>
