@@ -11,17 +11,20 @@
         <title>Snug as a bug in a couch</title>
     </head>
     <body>
-        <div class="row">
-            <div class="col-md-4">
-                <form action="{% url 'tmdb:query' %}" method="post" enctype="multipart/form-data" class="form">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
+        <div class="container">
+            <h1>{% block title %}Search{% endblock %}</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <form action="{% url 'tmdb:query' %}" method="post" enctype="multipart/form-data" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
 
-                    {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
-                </form>
-                    {% bootstrap_form_errors form layout='inline' %}
+                        {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
+                    </form>
+                        {% bootstrap_form_errors form layout='inline' %}
+                </div>
+                <div class="col-md-4"></div>
             </div>
-            <div class="col-md-4"></div>
         </div>
     </body>
 </html>
