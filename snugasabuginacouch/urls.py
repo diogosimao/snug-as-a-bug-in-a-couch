@@ -17,7 +17,6 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.views import generic
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 tmdb_patterns = ([
@@ -29,6 +28,3 @@ urlpatterns = [
     url(r'^', include(tmdb_patterns)),
     url(r'^$', generic.RedirectView.as_view(url='/manager'), name="index"),
 ]
-
-
-urlpatterns.extend(staticfiles_urlpatterns())
