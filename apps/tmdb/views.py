@@ -17,7 +17,7 @@ def query_view(request):
         if form.is_valid():
             search = tmdbsimple.Search()
             search_string = html.escape(form.data.get('search', ''))
-            if form.data.get('filter_choices', None):
+            if form.data.get('filters_choices', None):
                 response = search.movie(query=search_string, year='2018')
             else:
                 response = search.movie(query=search_string)
