@@ -1,2 +1,2 @@
-release: ./bin/release-tasks.sh
+release: ./bin/release_tasks.sh
 web: gunicorn snugasabuginacouch.wsgi --log-file -
