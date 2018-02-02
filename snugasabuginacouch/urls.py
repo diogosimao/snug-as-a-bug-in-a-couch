@@ -24,6 +24,8 @@ tmdb_patterns = ([
                       ], 'tmdb')
 
 urlpatterns = [
+    url(r'^jet/', include('jet.urls', 'jet')),
+    url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
     url(r'^', include(tmdb_patterns)),
     url(r'^$', generic.RedirectView.as_view(url='/manager'), name="index"),

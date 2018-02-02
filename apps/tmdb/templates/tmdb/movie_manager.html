@@ -12,35 +12,33 @@
         <title>Snug as a bug in a couch</title>
     </head>
     <body>
-        
-            <div class="container">
-                <h1>Search</h1>
-                <div class="row">
-                    <div class="col-md-4">
-                        <form action="{% url 'tmdb:manager' %}" method="post" enctype="multipart/form-data" class="form">
-                            {% csrf_token %}
-                            {% bootstrap_field form.filters_choices %}
-                            {% bootstrap_field form.search placeholder='Search for movies you wanna add' %}
+        <div class="container">
+            <h1>Search</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <form action="{% url 'tmdb:manager' %}" method="post" enctype="multipart/form-data" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_field form.filters_choices %}
+                        {% bootstrap_field form.search placeholder='Search for movies you wanna add' %}
 
-                            {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
-                        </form>
-                            {% bootstrap_form_errors form layout='inline' %}
-                    </div>
-                </div>
-                <h1>Choose</h1>
-                <div class="row">
-                    <div class="col-md-4">
-                        <form action="{% url 'tmdb:check' %}" method="post" enctype="multipart/form-data" class="form">
-                            {% csrf_token %}
-                            {% bootstrap_form choices_form %}
-
-                            {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
-                            {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
-                        </form>
-                            {% bootstrap_form_errors form layout='inline' %}
-                    </div>
+                        {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
+                    </form>
+                        {% bootstrap_form_errors form layout='inline' %}
                 </div>
             </div>
+            <h1>Choose</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <form action="{% url 'tmdb:check' %}" method="post" enctype="multipart/form-data" class="form">
+                        {% csrf_token %}
+                        {% bootstrap_form choices_form %}
 
+                        {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
+                        {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
+                    </form>
+                        {% bootstrap_form_errors form layout='inline' %}
+                </div>
+            </div>
+        </div>
     </body>
 </html>
