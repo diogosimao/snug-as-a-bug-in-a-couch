@@ -1,7 +1,8 @@
 import html
+import json
 
 import tmdbsimple
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from django.shortcuts import render
 from django.conf import settings
@@ -14,13 +15,14 @@ tmdbsimple.API_KEY = settings.TMDB_API_KEY
 
 def manager_view(request):
     movies_choices_list = []
-    choices_form = ChoicesForm()
     if request.method == 'POST':
-        form = QueryForm(request.POST)
-        if form.is_valid():
+        post_text = request.POST.get('post_query', None)
+        filters_choices = request.POST.get('filters_choices', None)
+        if post_text:
             search = tmdbsimple.Search()
-            search_string = html.escape(form.data.get('search', ''))
-            if form.data.get('filters_choices', None):
+
+            search_string = html.escape(post_text)
+            if filters_choices:
                 response = search.movie(query=search_string, year='2018')
             else:
                 response = search.movie(query=search_string)
@@ -28,19 +30,25 @@ def manager_view(request):
             for result in search.results:
                 movies_choices_list.append((result.get('id'), result.get('title')))
 
-            choices_form = ChoicesForm(movies_choices_list=movies_choices_list)
-    else:
+        return HttpResponse(
+                    json.dumps(search.results),
+                    content_type="application/json"
+                )
+    elif request.method == 'GET':
         form = QueryForm()
-
-    context = {'form': form, 'choices_form': choices_form}
-    
-    return render(request, 'tmdb/movie_manager.html', context)
+        choices_form = ChoicesForm()
+        context = {'form': form, 'choices_form': choices_form}
+        return render(request, 'tmdb/movie_manager.html', context)
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
 
 
 def check_view(request):
     if request.method == 'POST':
         form = ChoicesForm(request.POST)
-        print('POSTED')
         if form.is_valid():
             if 'seen' in request.POST:
                 return HttpResponseRedirect(reverse_lazy('tmdb:manager'))

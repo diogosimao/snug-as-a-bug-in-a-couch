@@ -150,5 +150,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 BOOTSTRAP3 = {
     'include_jquery': True,
+    'success_css_class': '',
 }
 
