@@ -26,5 +26,5 @@ tmdb_patterns = ([
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include(tmdb_patterns)),
-    url(r'^$', generic.RedirectView.as_view(url='/query'), name="index"),
+    url(r'^$', generic.RedirectView.as_view(url='/manager'), name="index"),
 ]
