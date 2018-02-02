@@ -15,26 +15,11 @@
             <div class="col-md-4">
                 <form action="{% url 'tmdb:query' %}" method="post" enctype="multipart/form-data" class="form">
                     {% csrf_token %}
-                    <p>
-                        {% bootstrap_form form %}
-                        <p>{% bootstrap_form_errors form layout='inline' %}
-                        </p>
-                        <p>
-                            {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
-                        </p>
-                    </p>
+                    {% bootstrap_form form %}
+
+                    {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary" icon="search" %}
                 </form>
-            </div>
-            <div class="col-md-4">
-                {% if search_results %}
-                    {% for result in search_results %}
-                        <label class="checkbox">
-                            <input type="checkbox" id={{ result.id }} value={{ result.id }}> {{ result.title }}
-                        </label>
-                    {% endfor %}
-                {% else %}
-                    <p>No movies.</p>
-                {% endif %}
+                    {% bootstrap_form_errors form layout='inline' %}
             </div>
             <div class="col-md-4"></div>
         </div>
