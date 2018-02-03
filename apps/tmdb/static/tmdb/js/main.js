@@ -6,7 +6,7 @@ $(document).ready(function(){
     
     function query_post() {
         $.ajax({
-            url : "{% url 'tmdb:manager' %}",
+            url : tmdb.URLS.manager,
             type : "POST", 
             data : { post_query : $('#query-search').val(),
                      filters_choices: $('#filters-choices').val(),

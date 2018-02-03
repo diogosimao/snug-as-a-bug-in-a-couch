@@ -11,6 +11,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Snug as a bug in a couch</title>
 
+        <script type="text/javascript">
+          var tmdb = {
+            URLS: {
+              manager: "{% url 'tmdb:manager' %}",
+            }
+          }
+        </script>
+
         <script src="{% static 'tmdb/js/main.js' %}"></script> 
         <link rel="stylesheet" href="{% static 'tmdb/css/main.css' %}" type="text/css" />
     </head>
