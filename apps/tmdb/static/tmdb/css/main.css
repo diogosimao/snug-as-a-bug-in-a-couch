@@ -88,15 +88,16 @@ html {
 .red {
     color: #EB4956;
 }
-.btn-custom {
+.btn-primary {
   color: #FFFFFF;
   background-color: #009B9B;
   border-color: #008989FF;
 }
-.btn-custom:hover,
-.btn-custom:focus,
-.btn-custom:active,
-.btn-custom.active,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:active:focus,
+.btn-primary:visited,
+.btn-primary:focus
 .open .dropdown-toggle.btn-custom {
   color: #FFFFFF;
   background-color: #008989FF;

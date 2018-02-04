@@ -65,8 +65,8 @@
                             {% csrf_token %}
                             {% bootstrap_form choices_form %}
 
-                            {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary btn-custom" icon="check" %}
-                            {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary btn-custom" icon="list" %}
+                            {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
+                            {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
                         </form>
                             {% bootstrap_form_errors form layout='inline' %}
                     </div>
