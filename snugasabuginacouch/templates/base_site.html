@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Snug as a bug in a couch{% endblock title %}
+
+{% block header %}
+    <header class="top" role="header">
+      <div class="container">
+        <a href="{% url 'index' %}" class="navbar-brand pull-left"><img src="{% static 'img/logo.png' %}" height="50px" alt="saabiac"></a>
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="glyphicon glyphicon-align-justify"></span>
+        </button>
+        <nav class="navbar-collapse collapse" role="navigation">
+          <ul class="navbar-nav nav">
+            <li><a href="{% url 'list_manager:search' %}">Search</a></li>
+            <li><a href="">Manager</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+{% endblock %}
+
+{% block banner %}
+<div class="banner">
+  <div class="container">
+    <h1>Banner</h1>
+  </div>
+</div>
+{% endblock banner %}
+
+{% block middle %}
+    <div class="middle">
+        <div class="container">
+            {% block content %}
+
+                {% block form %}
+
+                {% endblock form %}
+
+            {% endblock content %}
+        </div>
+    </div>
+{% endblock middle %}
+
+{% block bottom %}
+    <div class="bottom">
+      <div class="container">
+        <div class="col-md-4">
+          <h3><span class="glyphicon glyphicon-heart red"></span> Made with love</h3>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <h3><span><a href="http://www.freepik.com">Designed by Freepik</a></span></h3>
+        </div>
+      </div>
+    </div>
+{% endblock bottom %}

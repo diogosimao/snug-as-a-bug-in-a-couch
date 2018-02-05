@@ -15,18 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.shortcuts import render
 from django.urls import path, include
-from django.views import generic
 
 
-tmdb_patterns = ([
-                          url('', include('apps.list_manager.urls')),
-                      ], 'list_manager')
+def index_view(request):
+    return render(request, 'index.html')
+
+
+list_manager_patterns = ([
+                             url('', include('apps.list_manager.urls')),
+                         ], 'list_manager')
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
-    url(r'^', include(tmdb_patterns)),
-    url(r'^$', generic.RedirectView.as_view(url='/search'), name="index"),
+    url(r'^', include(list_manager_patterns)),
+    url(r'^$', index_view, name='index'),
 ]

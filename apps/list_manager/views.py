@@ -38,7 +38,7 @@ def tmdb_search_view(request):
         form = SearchForm()
         choices_form = ChoicesForm()
         context = {'form': form, 'choices_form': choices_form}
-        return render(request, 'list_manager/movie_manager.html', context)
+        return render(request, 'list_manager/movie_search.html', context)
     else:
         return HttpResponse(
             json.dumps({"nothing to see": "this isn't happening"}),

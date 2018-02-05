@@ -1,0 +1,55 @@
+{% extends "base_site.html" %}
+
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{% block scripts %}
+    <script type="text/javascript">
+      var list_manager = {
+        URLS: {
+          search: "{% url 'list_manager:search' %}",
+        }
+      }
+    </script>
+{% endblock scripts %}
+
+{% block banner %}
+<div class="banner">
+  <div class="container">
+    <h1>Movie list manager</h1>
+  </div>
+</div>
+{% endblock banner%}
+
+{% block form %}
+   <h1>Search</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="{% url 'list_manager:search' %}" method="post" enctype="multipart/form-data" class="form" id="query-form">
+                {% csrf_token %}
+                {% bootstrap_field form.filters_choices %}
+                {% bootstrap_field form.search %}
+
+                {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary btn-custom" icon="search" %}
+            </form>
+                {% bootstrap_form_errors form layout='inline' %}
+        </div>
+    </div>
+    <h1>Choose</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="{% url 'list_manager:mark' %}" method="post" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                {% bootstrap_form choices_form %}
+
+                {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
+                {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
+            </form>
+                {% bootstrap_form_errors form layout='inline' %}
+        </div>
+    </div>
+{% endblock form %}
