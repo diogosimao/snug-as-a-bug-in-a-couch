@@ -13,13 +13,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock title %}</title>
-        
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
+
         {% block scripts %}
-            <script src="{% static 'js/main.js' %}"></script>
         {% endblock scripts %}
 
         {% block stylesheets %}
-            <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
         {% endblock stylesheets %}
 
     </head>

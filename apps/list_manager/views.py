@@ -2,7 +2,7 @@ import html
 import json
 
 import tmdbsimple
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 
 from django.shortcuts import render
 from django.conf import settings
@@ -18,9 +18,9 @@ def tmdb_search_view(request):
     if request.method == 'POST':
         post_text = request.POST.get('post_query', None)
         filters_choices = request.POST.get('filters_choices', None)
-        if post_text:
-            search = tmdbsimple.Search()
-
+        search = tmdbsimple.Search()
+        response = None
+        if False:
             search_string = html.escape(post_text)
             if filters_choices:
                 response = search.movie(query=search_string, year='2018')
@@ -30,10 +30,11 @@ def tmdb_search_view(request):
             for result in search.results:
                 movies_choices_list.append((result.get('id'), result.get('title')))
 
-        return HttpResponse(
-                    json.dumps(search.results),
-                    content_type="application/json"
-                )
+        if response:
+            return HttpResponse(json.dumps(search.results), content_type="application/json")
+
+        return HttpResponseBadRequest(json.dumps({'err': 'Fill search field!'}), content_type="application/json")
+
     elif request.method == 'GET':
         form = SearchForm()
         choices_form = ChoicesForm()

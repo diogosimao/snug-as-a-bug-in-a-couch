@@ -21,8 +21,8 @@ $(document).ready(function(){
             },
 
             error : function(xhr,errmsg,err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                    " <a href='#' class='close'>&times;</a></div>"); 
+                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! Error: " + xhr.responseJSON.err +
+                    " <a href='" + list_manager.URLS.search + "' class='close'>&times;</a></div>"); 
             }
         });
     };
