@@ -20,13 +20,13 @@ from django.views import generic
 
 
 tmdb_patterns = ([
-                          url('', include('apps.tmdb.urls')),
-                      ], 'tmdb')
+                          url('', include('apps.list_manager.urls')),
+                      ], 'list_manager')
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
     url(r'^', include(tmdb_patterns)),
-    url(r'^$', generic.RedirectView.as_view(url='/manager'), name="index"),
+    url(r'^$', generic.RedirectView.as_view(url='/search'), name="index"),
 ]

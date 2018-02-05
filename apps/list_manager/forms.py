@@ -1,7 +1,7 @@
 from django import forms
 
 
-class QueryForm(forms.Form):
+class SearchForm(forms.Form):
 
     FILTER_CHOICES = [('2018', 'Release at 2018')]
 
