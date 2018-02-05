@@ -20,7 +20,7 @@ def tmdb_search_view(request):
         filters_choices = request.POST.get('filters_choices', None)
         search = tmdbsimple.Search()
         response = None
-        if False:
+        if post_text:
             search_string = html.escape(post_text)
             if filters_choices:
                 response = search.movie(query=search_string, year='2018')
