@@ -10,68 +10,76 @@
 
 {% block scripts %}
     <script type="text/javascript">
-      var list_manager = {
-        URLS: {
-          search: "{% url 'list_manager:search' %}",
-          default_poster: "{% static 'img/default.jpg' %}"
+        var list_manager = {
+            URLS: {
+              search: "{% url 'list_manager:search' %}",
+              default_poster: "{% static 'img/default.jpg' %}"
+            }
         }
-      }
     </script>
 {% endblock scripts %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+{% endblock stylesheets %}
+
 {% block banner %}
-<div class="banner">
-  <div class="container">
-    <h1>Movie watchlist</h1>
-  </div>
-</div>
+    <div class="banner">
+      <div class="container">
+        <h1>Movie watchlist</h1>
+      </div>
+    </div>
 {% endblock banner%}
 
 {% block form %}
-<div class="col-lg-4 content">
-    <h1>Search</h1>
-    <div class="row">
-        <div class="col-md">
-            <form action="" method="post" enctype="multipart/form-data" class="form" id="query-form">
-                {% csrf_token %}
-                {% bootstrap_field form.filters_choices %}
-                {% bootstrap_field form.search %}
-
-                {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary btn-custom" icon="search" %}
-            </form>
-                {% bootstrap_form_errors form layout='inline' %}
-
-            <div id="results"></div>
-
-        </div>
-    </div>
-    <h1>Choose and mark</h1>
-    <div class="row">
-        <div class="col-md">
-            <form action="{% url 'list_manager:mark' %}" method="post" enctype="multipart/form-data" class="form">
-                {% csrf_token %}
-                {% bootstrap_form choices_form %}
-
-                {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
-                {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
-            </form>
-                {% bootstrap_form_errors form layout='inline' %}
-        </div>
-    </div>
-</div>
-<div class="col-lg-8" align="center">
-    <h1>Preview</h1>
-    <div class="row">
-        <div class="col-md">
-            <form action="" method="post" enctype="multipart/form-data" class="form" id="thumbnail-img-form">
-                <div class="form-group">
+    <div class="col-lg-4 content">
+        <h1>Search</h1>
+        <div class="row">
+            <div class="col-md">
+                <form action="" method="post" enctype="multipart/form-data" class="form" id="query-form">
                     {% csrf_token %}
-                    {% bootstrap_form thumbnail_img_choices_form %}
+                    {% bootstrap_field form.filters_choices %}
+                    {% bootstrap_field form.search %}
 
-                    {% bootstrap_button "Button" button_type="submit" button_class="btn-primary btn-custom" icon="" %}
-                </div>
-            </form>
+                    {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary btn-custom" icon="search" %}
+                </form>
+                    {% bootstrap_form_errors form layout='inline' %}
+
+                <div id="results"></div>
+
+            </div>
+        </div>
+        <h1>Choose and mark</h1>
+        <div class="row">
+            <div class="col-md">
+                <form action="{% url 'list_manager:mark' %}" method="post" enctype="multipart/form-data" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form choices_form %}
+
+                    {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
+                    {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
+                </form>
+                    {% bootstrap_form_errors form layout='inline' %}
+            </div>
         </div>
     </div>
-</div>
+    <div class="col-lg-8" align="center">
+        <h1>Preview</h1>
+        <div class="row">
+            <div class="col-md">
+                <form action="" method="post" enctype="multipart/form-data" class="form" id="thumbnail-img-form">
+                    <div class="form-group">
+                        <div class="row">
+                            {% csrf_token %}
+                            {% bootstrap_form thumbnail_img_choices_form %}
+                        </div>
+
+                        <div class="row">
+                            {% bootstrap_button "Button" button_type="submit" button_class="btn-primary btn-custom" icon="" %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock form %}

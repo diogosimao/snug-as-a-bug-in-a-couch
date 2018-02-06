@@ -7,8 +7,8 @@ class SearchForm(forms.Form):
 
     filters_choices = forms.MultipleChoiceField(required=False, choices=FILTER_CHOICES,
                                                 widget=forms.CheckboxSelectMultiple(attrs={
-                                                    'id': 'filters-choices'}
-                                                ))
+                                                    'id': 'filters-choices'
+                                                }))
 
     search = forms.CharField(required=True, max_length=255, widget=forms.TextInput(
         attrs={
@@ -29,9 +29,8 @@ class ChoicesForm(forms.Form):
         choices=(),
         help_text='Check as many as you like.',
         widget=forms.SelectMultiple(attrs={
-            'id': 'movies-choices'}
-        )
-    )
+            'id': 'movies-choices'
+        }))
 
 
 class ThumbnailImagesChoicesForm(forms.Form):
@@ -39,8 +38,8 @@ class ThumbnailImagesChoicesForm(forms.Form):
     thumbnail_img_movies_choices = forms.MultipleChoiceField(
         required=False,
         choices=(),
+        label='',
         widget=forms.CheckboxSelectMultiple(attrs={
-            'id': 'thumbnail-img-movies-choices'}
-        )
-    )
+            'id': 'thumbnail-img-movies-choices',
+        }))
 

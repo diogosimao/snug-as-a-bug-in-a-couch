@@ -21,25 +21,25 @@
 {% endblock %}
 
 {% block banner %}
-<div class="banner">
-  <div class="container">
-    <h1>Banner</h1>
+  <div class="banner">
+    <div class="container">
+      <h1>Banner</h1>
+    </div>
   </div>
-</div>
 {% endblock banner %}
 
 {% block middle %}
-    <div class="middle">
-        <div class="container">
-            {% block content %}
+  <div class="middle">
+    <div class="container">
+      {% block content %}
 
-                {% block form %}
+        {% block form %}
 
-                {% endblock form %}
+        {% endblock form %}
 
-            {% endblock content %}
-        </div>
+      {% endblock content %}
     </div>
+  </div>
 {% endblock middle %}
 
 {% block bottom %}
