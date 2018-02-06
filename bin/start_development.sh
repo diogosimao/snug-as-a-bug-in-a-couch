@@ -10,6 +10,7 @@ case $choice in
   p|P) printf "\nRunning on pipenv...\n "
     pip install -r requirements.txt
     export DATABASE_URL=sqlite:////tmp/snugasabuginacouch-tmp-sqlite.db
+    python manage.py collectstatic --noinput
     python manage.py makemigrations
     python manage.py migrate
     python manage.py runserver ;;

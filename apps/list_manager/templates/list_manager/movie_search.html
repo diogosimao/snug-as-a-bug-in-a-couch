@@ -1,6 +1,7 @@
 {% extends "base_site.html" %}
 
 {% load bootstrap3 %}
+{% load static %}
 
 {% bootstrap_css %}
 {% bootstrap_javascript %}
@@ -12,6 +13,7 @@
       var list_manager = {
         URLS: {
           search: "{% url 'list_manager:search' %}",
+          default_poster: "{% static 'img/default.jpg' %}"
         }
       }
     </script>
@@ -26,9 +28,10 @@
 {% endblock banner%}
 
 {% block form %}
-   <h1>Search</h1>
+<div class="col-lg-4 content">
+    <h1>Search</h1>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md">
             <form action="" method="post" enctype="multipart/form-data" class="form" id="query-form">
                 {% csrf_token %}
                 {% bootstrap_field form.filters_choices %}
@@ -44,7 +47,7 @@
     </div>
     <h1>Choose and mark</h1>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md">
             <form action="{% url 'list_manager:mark' %}" method="post" enctype="multipart/form-data" class="form">
                 {% csrf_token %}
                 {% bootstrap_form choices_form %}
@@ -55,4 +58,20 @@
                 {% bootstrap_form_errors form layout='inline' %}
         </div>
     </div>
+</div>
+<div class="col-lg-8" align="center">
+    <h1>Preview</h1>
+    <div class="row">
+        <div class="col-md">
+            <form action="" method="post" enctype="multipart/form-data" class="form" id="thumbnail-img-form">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {% bootstrap_form thumbnail_img_choices_form %}
+
+                    {% bootstrap_button "Button" button_type="submit" button_class="btn-primary btn-custom" icon="" %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock form %}

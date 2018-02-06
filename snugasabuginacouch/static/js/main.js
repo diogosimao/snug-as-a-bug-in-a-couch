@@ -3,7 +3,9 @@ $(document).ready(function(){
         event.preventDefault();
         query_post();
     });
-    
+    $(".img-check").click(function(){
+                    $(this).toggleClass("check");
+                });
     function query_post() {
         $.ajax({
             url : list_manager.URLS.search,
@@ -17,9 +19,14 @@ $(document).ready(function(){
                     $("#movies-choices").prepend(
                         "<option value=" + value.id + ">" + value.title + "</option>"
                     );
-                });
+                    $("#thumbnail-img-movies-choices").prepend(
+                        "<label class='btn btn-primary'> " + 
+                        "<img src='" + (value.poster_url != '' ? value.poster_url : list_manager.URLS.default_poster) + "' " +
+                        "alt='"+ value.title + "' class='img-thumbnail img-check'><input type='checkbox' name='chk" + value.id + "' id='item" + value.id + "'" +
+                        "value='val" + value.id + "' class='hidden' autocomplete='off'></label>"
+                    );
+                })
             },
-
             error : function(xhr,errmsg,err) {
                 $('#results').html("<div class='alert-box alert radius' data-alert>Oops! Error: " + xhr.responseJSON.err +
                     " <a href='" + list_manager.URLS.search + "' class='close'>&times;</a></div>"); 

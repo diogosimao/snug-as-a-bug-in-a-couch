@@ -33,3 +33,14 @@ class ChoicesForm(forms.Form):
         )
     )
 
+
+class ThumbnailImagesChoicesForm(forms.Form):
+
+    thumbnail_img_movies_choices = forms.MultipleChoiceField(
+        required=False,
+        choices=(),
+        widget=forms.CheckboxSelectMultiple(attrs={
+            'id': 'thumbnail-img-movies-choices'}
+        )
+    )
+
