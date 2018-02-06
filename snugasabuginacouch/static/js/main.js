@@ -21,6 +21,8 @@ function query_post() {
          }, 
         success : function(json) {
             $('#query-search').val(''); // remove the value from the input
+            $('#movies-choices').html('');
+            $('#thumbnail-img-movies-choices').html('');
             $.each(json, function(key, value) {
                 $("#movies-choices").prepend(
                     "<option value=" + value.id + ">" + value.title + "</option>"
