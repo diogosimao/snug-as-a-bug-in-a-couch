@@ -28,11 +28,20 @@ function query_post() {
                     "<option value=" + value.id + ">" + value.title + "</option>"
                 );
                 $("#thumbnail-img-movies-choices").prepend(
-                    "<div class='col-xs-4 col-sm-3 nopad text-center'> " +
-                    "<label class='image-checkbox'> " + 
-                    "<img src='" + (value.poster_url != '' ? value.poster_url : list_manager.URLS.default_poster) + "' " +
-                    "alt='"+ value.title + "' class='img-responsive'/><input type='checkbox' name=image[] id='" + value.id + "' " +
-                    "value=''/><i class='fa fa-check hidden'></i></label></div>"
+                    "<div class='col-xs-4 col-sm-3 nopad text-right'> " +
+                    "<img class='crop' src='" + (value.poster_url != '' ? value.poster_url : list_manager.URLS.default_poster) + "' " +
+                    "alt='"+ value.title + "' class='img-responsive'/> " +
+                    "<div class='mark-bar'> " +
+                        "<label class='image-checkbox'> " +
+                            "<input name='image[]'' value='' type='checkbox'> " +
+                            "<i class='fa fa-check fa-2x'></i> " +
+                        "</label> " +
+                        "<label class='image-checkbox'> " +
+                            "<input name='image[]' value='' type='checkbox'> " +
+                            "<i class='fa fa-bookmark fa-2x'></i> " +
+                        "</label> " +
+                    "</div> " +
+                    "</div> "
                 );
             })
             // image gallery
