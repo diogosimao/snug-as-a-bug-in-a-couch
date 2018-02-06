@@ -4,26 +4,12 @@ $(document).ready(function(){
         query_post();
     })
 });
-$(document).on('click', '.image-checkbox', function () {
-    // image gallery
-    // init the state from the input
-    $('.image-checkbox').each(function () {
-      if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
-        $(this).addClass('image-checkbox-checked');
-      }
-      else {
-        $(this).removeClass('image-checkbox-checked');
-      }
-    })
-
-    // sync the state to the input
-    $('.image-checkbox').on('click', function (event) {
+$(document).on('click', '.image-checkbox', function (event) {
       $(this).toggleClass('image-checkbox-checked');
       var $checkbox = $(this).find('input[type="checkbox"]');
       $checkbox.prop("checked",!$checkbox.prop("checked"))
 
       event.preventDefault();
-    });
 });
 
 function query_post() {
@@ -47,6 +33,16 @@ function query_post() {
                     "value=''/> <i class='fa fa-check hidden'></i></label></div>"
                 );
             })
+            // image gallery
+            // init the state from the input
+            $('.image-checkbox').each(function () {
+              if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+                $(this).addClass('image-checkbox-checked');
+              }
+              else {
+                $(this).removeClass('image-checkbox-checked');
+              }
+            })            
         },
         error : function(xhr,errmsg,err) {
             $('#results').html("<div class='alert-box alert radius' data-alert>Oops! Error: " + xhr.responseJSON.err +
