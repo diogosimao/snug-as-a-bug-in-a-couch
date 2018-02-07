@@ -1,3 +1,13 @@
 from django.test import TestCase
 
-# Create your tests here.
+from .forms import SearchForm
+
+
+class SearchFormTest(TestCase):
+
+    def setUp(self):
+        TestCase.setUp(self)
+
+    def test_init(self):
+        SearchForm()
+
