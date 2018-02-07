@@ -1,7 +1,10 @@
 SnugAsABugInACouch
 =====================================================
 
-There are two options to setup and run the app. You can either choose to setup the Docker (ToDo) environment or run it via `pipenv` (virtualenv like system). In both options you must have the 'stack' installed. 
+yet another watchlist manager
+
+[![Build Status](https://travis-ci.org/diogosimao/snug-as-a-bug-in-a-couch.svg?branch=master)](https://travis-ci.org/diogosimao/snug-as-a-bug-in-a-couch)
+
 
 Stack
 =============
@@ -9,6 +12,11 @@ Stack
 * pipenv
 * pip
 * Python 3.6
+
+Info
+====
+
+There are two options to setup and run the app. You can either choose to setup the Docker (ToDo) environment or run it via `pipenv` (virtualenv like system). In both options you must have the 'stack' installed. 
 
 Docker setup requirements 
 =============================
