@@ -151,7 +151,15 @@ html {
   color: #CCC;
 }
 .crop {
-    width: 185px ;
-    height: 270px;
     overflow: hidden;
+}
+.auto-adjust {
+    height: auto;
+    width: auto;
+}
+.box {
+    width: 110px;
+    height: 115px;
+    display: inline-block;
+    *display: inline;
 }

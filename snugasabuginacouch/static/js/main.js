@@ -28,19 +28,21 @@ function query_post() {
                     "<option value=" + value.id + ">" + value.title + "</option>"
                 );
                 $("#thumbnail-img-movies-choices").prepend(
-                    "<div class='col-xs-4 col-sm-3 nopad text-right'> " +
-                    "<img class='crop' src='" + (value.poster_url != '' ? value.poster_url : list_manager.URLS.default_poster) + "' " +
-                    "alt='"+ value.title + "' class='img-responsive'/> " +
-                    "<div class='mark-bar'> " +
-                        "<label class='image-checkbox'> " +
-                            "<input name='image[]'' value='' type='checkbox'> " +
-                            "<i class='fa fa-check fa-2x'></i> " +
-                        "</label> " +
-                        "<label class='image-checkbox'> " +
-                            "<input name='image[]' value='' type='checkbox'> " +
-                            "<i class='fa fa-bookmark fa-2x'></i> " +
-                        "</label> " +
-                    "</div> " +
+                    "<div class='box nopad text-center'> " +
+                        "<div class=''> " +
+                            "<img src='" + (value.poster_url != '' ? value.poster_url : list_manager.URLS.default_poster) + "' " +
+                            "alt='"+ value.title + "' class='img-responsive'/> " +
+                        "</div> " +
+                        "<div class='nopad mark-bar text-right'> " +
+                            "<label class='image-checkbox'> " +
+                                "<input name='image[]'' value='' type='checkbox'> " +
+                                "<i class='fa fa-check fa-2x'></i> " +
+                            "</label> " +
+                            "<label class='image-checkbox'> " +
+                                "<input name='image[]' value='' type='checkbox'> " +
+                                "<i class='fa fa-bookmark fa-2x'></i> " +
+                            "</label> " +
+                        "</div> " +
                     "</div> "
                 );
             })
