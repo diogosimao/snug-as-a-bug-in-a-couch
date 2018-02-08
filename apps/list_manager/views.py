@@ -18,13 +18,12 @@ def tmdb_search_view(request):
         post_text = request.POST.get('post_query', None)
         filters_choices = request.POST.get('filters_choices', None)
         tmdb_search = tmdbsimple.Search()
-        response = None
         if post_text:
             search_string = html.escape(post_text)
             if filters_choices:
-                response = tmdb_search.movie(query=search_string, year='2018')
+                tmdb_search.movie(query=search_string, year='2018')
             else:
-                response = tmdb_search.movie(query=search_string)
+                tmdb_search.movie(query=search_string)
             tmdb_config = tmdbsimple.Configuration()
             tmdb_config_info = tmdb_config.info()
             movies_choices_list = []
@@ -42,16 +41,15 @@ def tmdb_search_view(request):
                 result['poster_url'] = poster_url
                 movies_choices_list.append(result)
 
-        if response:
+        if movies_choices_list:
             return HttpResponse(json.dumps(movies_choices_list), content_type="application/json")
 
         return HttpResponseBadRequest(json.dumps({'err': 'Fill search field!'}), content_type="application/json")
 
     elif request.method == 'GET':
-        form = SearchForm()
-        choices_form = ChoicesForm()
-        thumbnail_img_choices_form = ThumbnailImagesChoicesForm()
-        context = {'form': form, 'choices_form': choices_form, 'thumbnail_img_choices_form': thumbnail_img_choices_form}
+        context = {'form': SearchForm(),
+                   'choices_form': ChoicesForm(),
+                   'thumbnail_img_choices_form': ThumbnailImagesChoicesForm()}
         return render(request, 'list_manager/movie_search.html', context)
     else:
         return HttpResponse(
