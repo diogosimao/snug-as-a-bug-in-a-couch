@@ -15,13 +15,13 @@ class MarkerViewTest(TestCase):
     """
 
     def test_post_valid_form_without_action(self):
-        response = self.client.post(reverse_lazy('list_manager:mark'), {'movies_choices': ['choice1', 'choice2']})
+        response = self.client.post(reverse_lazy('list_manager:mark'), {'movies_choices': ['1', '2']})
         self.assertJSONEqual(json.dumps({"err": "Invalid action"}), json.loads(response.content))
 
     def test_post_valid_form_with_action(self):
-        response = self.client.post(reverse_lazy('list_manager:mark'), {'movies_choices': ['choice1', 'choice2'],
+        response = self.client.post(reverse_lazy('list_manager:mark'), {'movies_choices': ['2', '1'],
                                                                         'action': 'seen'},)
-        self.assertJSONEqual(json.dumps({"seen": True}), json.loads(response.content))
+        self.assertJSONEqual(json.dumps({"marked": True}), json.loads(response.content))
 
     def test_post_invalid_form(self):
         response = self.client.post(reverse_lazy('list_manager:mark'), {'invalid': 'form'})
@@ -34,3 +34,16 @@ class MarkerViewTest(TestCase):
     def test_not_post(self):
         response = self.client.get(reverse_lazy('list_manager:mark'))
         self.assertEqual(response.url, reverse_lazy('list_manager:search'))
+
+
+class SearchViewTest(TestCase):
+    
+    def test_query_movie_empty_search_field(self):
+        response = self.client.post(reverse_lazy('list_manager:search'))
+        self.assertJSONEqual(json.dumps({'err': 'Fill search field!'}), json.loads(response.content))
+
+    def test_default_response(self):
+        response = self.client.get(reverse_lazy('list_manager:search'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'list_manager/movie_search.html')
+        self.assertContains(response, 'Choose and mark')

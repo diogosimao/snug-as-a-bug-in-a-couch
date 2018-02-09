@@ -21,7 +21,18 @@ class DefaultBaseModel(TimestampedModel):
 
         super().save(**kwargs)
 
+    class Meta:
+        abstract = True
+
 
 class WatchList(DefaultBaseModel):
     tmdb_id = models.IntegerField(blank=False, null=False)
     seen = models.NullBooleanField()
+    
+    def __str__(self):
+        return self.tmdb_id
+
+    class Meta:
+        ordering = ('tmdb_id',)
+        verbose_name_plural = 'watchlist'
+
