@@ -23,10 +23,6 @@ def index_view(request):
     return render(request, 'index.html')
 
 
-def test_view(request):
-    return render(request, 'test.html')
-
-
 list_manager_patterns = ([
                              url('', include('apps.list_manager.urls')),
                          ], 'list_manager')
@@ -37,5 +33,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include(list_manager_patterns)),
     url(r'^$', index_view, name='index'),
-    url(r'test/', test_view, name='test')
 ]
