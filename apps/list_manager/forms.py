@@ -20,7 +20,9 @@ class SearchForm(forms.Form):
 
 class ChoicesForm(forms.Form):
 
-    def __init__(self, movies_choices_list=list(), *args, **kwargs):
+    def __init__(self, movies_choices_list=None, *args, **kwargs):
+        if movies_choices_list is None:
+            movies_choices_list = list()
         super(ChoicesForm, self).__init__(*args, **kwargs)
         movies_choices = forms.MultipleChoiceField(choices=movies_choices_list,
                                                    required=False,

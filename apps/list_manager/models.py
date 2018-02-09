@@ -19,7 +19,7 @@ class DefaultBaseModel(TimestampedModel):
         if not self.id:
             self.slug = uuid.uuid4()
 
-        super().save(**kwargs)
+        super(DefaultBaseModel, self).save(**kwargs)
 
     class Meta:
         abstract = True
