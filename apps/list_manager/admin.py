@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import WatchList
+
+
+@admin.register(WatchList)
+class WatchListAdmin(admin.ModelAdmin):
+    pass

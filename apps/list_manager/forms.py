@@ -20,16 +20,22 @@ class SearchForm(forms.Form):
 
 class ChoicesForm(forms.Form):
 
-    def __init__(self, movies_choices_list=[], *args, **kwargs):
+    def __init__(self, movies_choices_list=list(), *args, **kwargs):
         super(ChoicesForm, self).__init__(*args, **kwargs)
-        self.fields['movies_choices'].choices = movies_choices_list
+        movies_choices = forms.MultipleChoiceField(choices=movies_choices_list,
+                                                   required=False,
+                                                   help_text='Check as many as you like.',
+                                                   widget=forms.SelectMultiple(attrs={
+                                                       'id': 'movies-choices',
+                                                   }))
+        self.fields['movies_choices'] = movies_choices
 
     movies_choices = forms.MultipleChoiceField(
         required=False,
         choices=(),
         help_text='Check as many as you like.',
         widget=forms.SelectMultiple(attrs={
-            'id': 'movies-choices'
+            'id': 'movies-choices',
         }))
 
 

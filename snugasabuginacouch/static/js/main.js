@@ -3,7 +3,21 @@ $(document).ready(function(){
         event.preventDefault();
         query_post();
     })
+
+    $('#mark-form button[type=submit]').click(function(){
+        $("button[type=submit]", $(this).parents("form")).removeAttr("clicked");
+        $(this).attr("clicked", "true");
+    })
+    $("#mark-form").submit(function(event) { 
+        var buttonValue = $("button[type=submit][clicked=true]").val();
+        data = $('#mark-form').serializeArray();
+        data.push({name: "action", value: buttonValue});
+        event.preventDefault();
+        mark_post(data);
+    });
 });
+
+
 $(document).on('click', '.image-checkbox', function (event) {
       $(this).toggleClass('image-checkbox-checked');
       var $checkbox = $(this).find('input[type="checkbox"]');
@@ -12,13 +26,29 @@ $(document).on('click', '.image-checkbox', function (event) {
       event.preventDefault();
 });
 
+function mark_post(data) {
+    $.ajax({
+        url : $('#mark-form').attr('action'),
+        type: "POST",
+        data : data,
+        success : function(response) {
+            $('#mark-results').html("<div class='alert-box alert radius' data-alert>" + (response.marked == true ? "Saved!" : "Error") +
+                "<a href='' class='close'>&times;</a></div>"); 
+            },
+        error : function(xhr,errmsg,err) {
+            $('#mark-results').html("<div class='alert-box alert radius' data-alert>Oops! Error: " + xhr.responseJSON.err +
+                "<a href='' class='close'>&times;</a></div>"); 
+        }
+    });
+};
+
 function query_post() {
     $.ajax({
-        url : list_manager.URLS.search,
+        url : $('#query-form').attr('action'),
         type : "POST", 
         data : { post_query : $('#query-search').val(),
                  filters_choices: $('#filters-choices').val(),
-         }, 
+             }, 
         success : function(json) {
             $('#query-search').val(''); // remove the value from the input
             $('#movies-choices').html('');
@@ -58,8 +88,8 @@ function query_post() {
             })            
         },
         error : function(xhr,errmsg,err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! Error: " + xhr.responseJSON.err +
-                " <a href='" + list_manager.URLS.search + "' class='close'>&times;</a></div>"); 
+            $('#search-results').html("<div class='alert-box alert radius' data-alert>Oops! Error: " + xhr.responseJSON.err +
+                " <a href='' class='close'>&times;</a></div>"); 
         }
     });
 };

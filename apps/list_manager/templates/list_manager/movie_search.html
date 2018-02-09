@@ -45,21 +45,23 @@
                 </form>
                     {% bootstrap_form_errors form layout='inline' %}
 
-                <div id="results"></div>
+                <div id="search-results"></div>
 
             </div>
         </div>
         <h1>Choose and mark</h1>
         <div class="row">
             <div class="col-md">
-                <form action="{% url 'list_manager:mark' %}" method="post" enctype="multipart/form-data" class="form">
+                <form action="{% url 'list_manager:mark' %}" method="post" enctype="multipart/form-data" class="form" id="mark-form">
                     {% csrf_token %}
                     {% bootstrap_form choices_form %}
 
-                    {% bootstrap_button "Seen" button_type="submit" name="seen" button_class="btn-primary" icon="check" %}
-                    {% bootstrap_button "Wanna see" button_type="submit" name="wannasee" button_class="btn-primary" icon="list" %}
+                    {% bootstrap_button "Seen" button_type="submit" value="seen" button_class="btn-primary" icon="check" %}
+                    {% bootstrap_button "Wanna see" button_type="submit" value="wannasee" button_class="btn-primary" icon="list" %}
                 </form>
                     {% bootstrap_form_errors form layout='inline' %}
+
+                <div id="mark-results"></div>
             </div>
         </div>
     </div>
