@@ -1,8 +1,14 @@
 import json
 
 from django.http import HttpResponseBadRequest
-from django.test import TestCase, Client
+from django.test import TestCase
+from unittest.mock import patch
 from django.urls import reverse_lazy
+
+
+movies_choices_list_sample = [{'id': 445842,
+                              'title': 'Saber Google',
+                              'poster_url': 'https://image.tmdb.org/t/p/w45/ujkOTrAHLIYE3vTuIIiNZYtyhlV.jpg'}]
 
 
 class MarkerViewTest(TestCase):
@@ -47,3 +53,19 @@ class SearchViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'list_manager/movie_search.html')
         self.assertContains(response, 'Choose and mark')
+
+    def test_unexpected_method_request(self):
+        response = self.client.options(reverse_lazy('list_manager:search'))
+        self.assertJSONEqual(json.dumps({"nothing to see": "this isn't happening"}), json.loads(response.content))
+
+    @patch('apps.list_manager.views.retrieve_movies_choices_list_from_tmdb_api_results')
+    def test_query_movie_with_valid_search_no_results(self, mock_retrieve_movies_choices_list):
+        mock_retrieve_movies_choices_list.return_value = []
+        response = self.client.post(reverse_lazy('list_manager:search'), {'post_query': 'Movie Name'})
+        self.assertJSONEqual(json.dumps({'err': 'tmdb returned no results'}), json.loads(response.content))
+
+    @patch('apps.list_manager.views.retrieve_movies_choices_list_from_tmdb_api_results')
+    def test_query_movie_with_valid_search_and_results(self, mock_retrieve_movies_choices_list):
+        mock_retrieve_movies_choices_list.return_value = movies_choices_list_sample
+        response = self.client.post(reverse_lazy('list_manager:search'), {'post_query': 'Movie Name'})
+        self.assertJSONEqual(json.dumps(movies_choices_list_sample), json.loads(response.content))

@@ -1,49 +1,24 @@
-import html
 import json
 from ast import literal_eval
 
-import tmdbsimple
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
-from django.conf import settings
 from django.urls import reverse_lazy
 
 from .forms import SearchForm, ChoicesForm, ThumbnailImagesChoicesForm
 from .models import WatchList
-
-tmdbsimple.API_KEY = settings.TMDB_API_KEY
+from .helpers import retrieve_movies_choices_list_from_tmdb_api_results
 
 
 def tmdb_search_view(request):
     if request.method == 'POST':
         post_text = request.POST.get('post_query', None)
-        filters_choices = request.POST.get('filters_choices', None)
-        tmdb_search = tmdbsimple.Search()
         if post_text:
-            search_string = html.escape(post_text)
-            if filters_choices:
-                tmdb_search.movie(query=search_string, year='2018')
-            else:
-                tmdb_search.movie(query=search_string)
-            tmdb_config = tmdbsimple.Configuration()
-            tmdb_config_info = tmdb_config.info()
-            movies_choices_list = []
-            for item in tmdb_search.results:
-                result = {}
-                base_url = tmdb_config_info.get('images').get('secure_base_url')
-                size = tmdb_config_info.get('images').get('profile_sizes')[1]
-                poster_path = item.get('poster_path')
-                poster_url = ""
-                if poster_path:
-                    poster_url = "{}{}{}".format(base_url, size, poster_path)
-
-                result['id'] = item.get('id')
-                result['title'] = item.get('title')
-                result['poster_url'] = poster_url
-                movies_choices_list.append(result)
-
+            movies_choices_list = retrieve_movies_choices_list_from_tmdb_api_results(post_text)
             if movies_choices_list:
                 return HttpResponse(json.dumps(movies_choices_list), content_type="application/json")
+            else:
+                return HttpResponse(json.dumps({'err': 'tmdb returned no results'}), content_type="application/json")
 
         return HttpResponseBadRequest(json.dumps({'err': 'Fill search field!'}), content_type="application/json")
 
