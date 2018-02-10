@@ -12,3 +12,5 @@ script:
   - coverage run --source=apps,snugasabuginacouch manage.py test
 after_success:
   - coveralls
+env:
+  - DATABASE_URL=sqlite:////tmp/snugasabuginacouch-tmp-sqlite.db
