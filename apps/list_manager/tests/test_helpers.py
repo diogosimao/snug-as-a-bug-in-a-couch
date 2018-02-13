@@ -3,6 +3,7 @@ from unittest.mock import patch
 
 from apps.list_manager import helpers
 
+
 tmdb_movie_search_result_sample = [{'id': 445842,
                                     'title': 'Saber Google',
                                     'poster_path': '/ujkOTrAHLIYE3vTuIIiNZYtyhlV.jpg'}
@@ -27,9 +28,15 @@ class TMDBHelperTest(TestCase):
         output = helpers.retrieve_movies_choices_list_from_tmdb_api_results('string')
         self.assertEqual(output, desired_output)
 
-    @patch('tmdbsimple.Search.movie')
-    def test_retrieve_tmdb_api_results(self, mock_search):
-        pass
+
+    @patch('apps.list_manager.helpers.html')
+    @patch('tmdbsimple.Search')
+    def test_retrieve_tmdb_api_results(self, mock_search, mock_html):
+        mock_search.return_value.movie.return_value = None
+        mock_search.return_value.results = tmdb_movie_search_result_sample
+        self.assertEqual(tmdb_movie_search_result_sample, helpers.retrieve_tmdb_api_results("string?venus/marte''"))
+        self.assertTrue(mock_html.escape.called)
+
 
     @patch('tmdbsimple.Configuration')
     def test_retrieve_tmdb_api_config_info(self, mock_config_info):
