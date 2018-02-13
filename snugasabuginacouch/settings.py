@@ -14,6 +14,8 @@ import dj_database_url
 import os
 import environ
 
+from django.utils.translation import ugettext_lazy as _
+
 
 root = environ.Path(__file__)
 
@@ -71,6 +73,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -153,3 +156,11 @@ BOOTSTRAP3 = {
     'success_css_class': '',
 }
 
+LANGUAGES = (
+    ('en', _('English')),
+    ('pt-br', _('Brazilian Portuguese')),
+)
+
+LOCALES_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)

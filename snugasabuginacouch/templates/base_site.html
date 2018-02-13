@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+{% load i18n %}
 {% load static %}
 
 {% block title %}Snug as a bug in a couch{% endblock title %}
@@ -12,8 +14,8 @@
         </button>
         <nav class="navbar-collapse collapse" role="navigation">
           <ul class="navbar-nav nav">
-            <li><a href="{% url 'list_manager:search' %}">Search</a></li>
-            <li><a href="{% url 'list_manager:manager_list' %}">Manager</a></li>
+            <li><a href="{% url 'list_manager:search' %}">{% trans 'Search' %}</a></li>
+            <li><a href="{% url 'list_manager:manager_list' %}">{% trans 'Manager' %}</a></li>
           </ul>
         </nav>
       </div>
@@ -46,7 +48,7 @@
     <div class="bottom">
       <div class="container">
         <div class="col-md-4">
-          <h3><span class="glyphicon glyphicon-heart red"></span> Made with love</h3>
+          <h3><span class="glyphicon glyphicon-heart red"></span> {% trans 'Made with love' %}</h3>
         </div>
         <div class="col-md-4">
         </div>

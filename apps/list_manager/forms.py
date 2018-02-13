@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from django import forms
 
 
@@ -14,7 +15,7 @@ class SearchForm(forms.Form):
         attrs={
             'required': 'True',
             'id': 'query-search',
-            'placeholder': 'Search for movies you wanna add to your lists'
+            'placeholder': _('Search for movies you wanna add to your lists')
         }))
 
 
@@ -26,7 +27,7 @@ class ChoicesForm(forms.Form):
         super(ChoicesForm, self).__init__(*args, **kwargs)
         movies_choices = forms.MultipleChoiceField(choices=movies_choices_list,
                                                    required=False,
-                                                   help_text='Check as many as you like.',
+                                                   help_text=_('Check as many as you like.'),
                                                    widget=forms.SelectMultiple(attrs={
                                                        'id': 'movies-choices',
                                                    }))
@@ -35,7 +36,7 @@ class ChoicesForm(forms.Form):
     movies_choices = forms.MultipleChoiceField(
         required=False,
         choices=(),
-        help_text='Check as many as you like.',
+        help_text=_('Check as many as you like.'),
         widget=forms.SelectMultiple(attrs={
             'id': 'movies-choices',
         }))

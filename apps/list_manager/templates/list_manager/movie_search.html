@@ -1,5 +1,6 @@
 {% extends "base_site.html" %}
 
+{% load i18n %}
 {% load bootstrap3 %}
 {% load static %}
 
@@ -26,14 +27,14 @@
 {% block banner %}
     <div class="banner">
       <div class="container">
-        <h1>Movie watchlist</h1>
+        <h1>{% trans 'Movie watchlist' %}</h1>
       </div>
     </div>
 {% endblock banner%}
 
 {% block form %}
     <div class="col-lg-4 content">
-        <h1>Search</h1>
+        <h1>{% trans 'Search' %}</h1>
         <div class="row">
             <div class="col-md">
                 <form action="" method="post" enctype="multipart/form-data" class="form" id="query-form">
@@ -49,7 +50,7 @@
 
             </div>
         </div>
-        <h1>Choose and mark</h1>
+        <h1>{% trans 'Choose and mark' %}</h1>
         <div class="row">
             <div class="col-md">
                 <form action="{% url 'list_manager:mark' %}" method="post" enctype="multipart/form-data" class="form" id="mark-form">
@@ -67,7 +68,7 @@
     </div>
     <div class="col-lg-8" align="center">
         <div class="row">
-            <h1>Or just click bellow the image</h1>
+            <h1>{% trans 'Or just click bellow the image' %}</h1>
         </div>
         <div class="row auto-adjust">
             <form action="" method="post" enctype="multipart/form-data" class="form" id="thumbnail-img-form">

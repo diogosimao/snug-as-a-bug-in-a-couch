@@ -1,5 +1,6 @@
 {% extends "base_site.html" %}
 
+{% load i18n %}
 {% load icons %}
 {% load bootstrap3 %}
 {% load static %}
@@ -19,7 +20,7 @@
 {% block banner %}
     <div class="banner">
       <div class="container">
-        <h1>Movies Exclusion</h1>
+        <h1>{% trans 'Movies Exclusion' %}</h1>
       </div>
     </div>
 {% endblock banner%}
@@ -28,7 +29,7 @@
     <div class="col-lg-8 content">
         <div class="row">
             <div class="col-lg">
-                <h1>Items list</h1>
+                <h1>{% trans 'Items list' %}</h1>
                 <ul>
                 {% for item in object_list %}
                     {% if item.seen %} {% icon 'check' extra_classes='fa-lg' %} {% else %} {% icon 'bookmark' extra_classes='fa-2x' %} {% endif %} 
@@ -37,7 +38,7 @@
                      - {{ item.title }}
                     <br/>
                 {% empty %}
-                    {% icon 'ticket' extra_classes='fa-lg' %} No items in watchlist yet.
+                    {% icon 'ticket' extra_classes='fa-lg' %} {% trans 'No items in watchlist yet.' %}
                 {% endfor %}
                 </ul>
             </div>
