@@ -13,6 +13,9 @@ tmdb_configuration_info_sample = {'images': {'secure_base_url': 'https://image.t
                                              'profile_sizes': ['x00', 'w45']}
                                   }
 
+tmdb_movie_info_result_sample = {'original_title': 'LEGO Marvel Super Heroes: Avengers Reassembled!',
+                                 'title': 'LEGO Marvel Super Heroes: Avengers Reassembled!'}
+
 
 class TMDBHelperTest(TestCase):
 
@@ -42,3 +45,10 @@ class TMDBHelperTest(TestCase):
     def test_retrieve_tmdb_api_config_info(self, mock_config_info):
         mock_config_info.return_value.info.return_value = tmdb_configuration_info_sample
         self.assertEqual(helpers.retrieve_tmdb_api_config_info(), tmdb_configuration_info_sample)
+
+
+    @patch('tmdbsimple.Movies')
+    def test_retrieve_movie_info_by_tmdb_id(self, mock_movies):
+        mock_movies.return_value.info.return_value = tmdb_movie_info_result_sample
+        self.assertEqual(helpers.retrieve_movie_info_by_tmdb_id(id=368304).get('id'),
+                         tmdb_movie_info_result_sample.get('id'))

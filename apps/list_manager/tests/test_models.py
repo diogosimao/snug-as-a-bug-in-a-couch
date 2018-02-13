@@ -1,6 +1,8 @@
 from django.test import TestCase
+from unittest.mock import patch, PropertyMock
 
 from apps.list_manager.models import WatchList
+from .test_helpers import tmdb_movie_info_result_sample
 
 
 class WatchListModelTestCase(TestCase):
@@ -25,3 +27,9 @@ class WatchListModelTestCase(TestCase):
     def test__model_can_delete_item(self):
         WatchList.objects.all().delete()
         self.assertEqual(WatchList.objects.count(), 0)
+
+    @patch('apps.list_manager.models.WatchList.title', new_callable=PropertyMock)
+    def test__model_can_get_title_from_tmdb_by_id(self, mock_model):
+        mock_model.return_value = tmdb_movie_info_result_sample.get('title')
+        self.assertEqual(WatchList(tmdb_id=368304).title, 'LEGO Marvel Super Heroes: Avengers Reassembled!')
+

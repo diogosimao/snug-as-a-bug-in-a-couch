@@ -4,6 +4,8 @@ from ast import literal_eval
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView
+from django.views.generic.list import ListView
 
 from .forms import SearchForm, ChoicesForm, ThumbnailImagesChoicesForm
 from .models import WatchList
@@ -60,4 +62,14 @@ def marker_view(request):
             return HttpResponseBadRequest(json.dumps({'err': 'Invalid form post'}), content_type="application/json")
 
     return HttpResponseRedirect(reverse_lazy('list_manager:search'))
+
+
+class WatchListView(ListView):
+    model = WatchList
+
+
+class WatchListDeleteView(DeleteView):
+    template_name_suffix = '_check_delete'
+    model = WatchList
+    success_url = reverse_lazy('list_manager:manager_list')
 

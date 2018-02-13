@@ -2,6 +2,8 @@ import uuid
 
 from django.db import models
 
+from .helpers import retrieve_movie_info_by_tmdb_id
+
 
 class TimestampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -35,4 +37,8 @@ class WatchList(DefaultBaseModel):
     class Meta:
         ordering = ('tmdb_id',)
         verbose_name_plural = 'watchlist'
+
+    @property
+    def title(self):
+        return retrieve_movie_info_by_tmdb_id(self.tmdb_id).get('title')
 

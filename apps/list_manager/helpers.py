@@ -6,6 +6,11 @@ from django.conf import settings
 tmdbsimple.API_KEY = settings.TMDB_API_KEY
 
 
+def retrieve_movie_info_by_tmdb_id(id):
+    tmdb_movie = tmdbsimple.Movies(id=id)
+    return tmdb_movie.info()
+
+
 def retrieve_tmdb_api_results(search_string):
     tmdb_search = tmdbsimple.Search()
     tmdb_search.movie(query=html.escape(search_string))

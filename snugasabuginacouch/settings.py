@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'apps.list_manager',
 
     'bootstrap3',
+    'django_icons',
 ]
 
 MIDDLEWARE = [

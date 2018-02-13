@@ -69,3 +69,13 @@ class SearchViewTest(TestCase):
         mock_retrieve_movies_choices_list.return_value = movies_choices_list_sample
         response = self.client.post(reverse_lazy('list_manager:search'), {'post_query': 'Movie Name'})
         self.assertJSONEqual(json.dumps(movies_choices_list_sample), json.loads(response.content))
+
+
+class ManagerViewTest(TestCase):
+
+    def test_manager_view_default_response(self):
+        response = self.client.get(reverse_lazy('list_manager:manager_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'list_manager/watchlist_list.html')
+        self.assertContains(response, 'No items in watchlist yet')
+

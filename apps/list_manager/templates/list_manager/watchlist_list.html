@@ -1,0 +1,46 @@
+{% extends "base_site.html" %}
+
+{% load icons %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{% block stylesheets %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous">
+{% endblock stylesheets %}
+
+{% block banner %}
+    <div class="banner">
+      <div class="container">
+        <h1>Movies Exclusion</h1>
+      </div>
+    </div>
+{% endblock banner%}
+
+{% block form %}
+    <div class="col-lg-8 content">
+        <div class="row">
+            <div class="col-lg">
+                <h1>Items list</h1>
+                <ul>
+                {% for item in object_list %}
+                    {% if item.seen %} {% icon 'check' extra_classes='fa-lg' %} {% else %} {% icon 'bookmark' extra_classes='fa-2x' %} {% endif %} 
+                    <a href="{% url 'list_manager:manager_delete' slug=item.slug %}"> 
+                        {% icon 'trash' extra_classes='fa-2x' %} </a>
+                     - {{ item.title }}
+                    <br/>
+                {% empty %}
+                    {% icon 'ticket' extra_classes='fa-lg' %} No items in watchlist yet.
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock form %}
