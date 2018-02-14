@@ -97,6 +97,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -158,9 +159,14 @@ BOOTSTRAP3 = {
 
 LANGUAGES = (
     ('en', _('English')),
-    ('pt-br', _('Brazilian Portuguese')),
+    ('pt-br', _('Português')),
 )
 
-LOCALES_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
+LOCALE_PATHS = (
+    os.path.join(PROJECT_ROOT, 'locale'),
+)
+
+INSTALL_LOCALE = (
+    ('en', _('English')),
+    ('pt-br', _('Português')),
 )

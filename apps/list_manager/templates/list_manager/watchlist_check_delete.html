@@ -20,7 +20,7 @@
 {% block banner %}
     <div class="banner">
       <div class="container">
-        <h1>Confirm exclusion</h1>
+        <h1>{% trans 'Confirm exclusion' %}</h1>
       </div>
     </div>
 {% endblock banner%}
@@ -30,7 +30,11 @@
 <form action="#" method="post">{% csrf_token %}
     <br/>
     <p>{% trans 'Are you sure you want to delete' %} "{{ object.title }}"?</p>
-    {% bootstrap_button "Delete item" button_type="submit" button_class="btn-primary btn-custom" icon="trash" %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary btn-custom" value="wannasee">
+        {% bootstrap_icon "Trash" %} {% trans 'Delete item' %}
+      </button>
+    {% endbuttons %}
 </form>
 
 {% endblock form %}

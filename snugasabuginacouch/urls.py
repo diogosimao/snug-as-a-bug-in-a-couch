@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.shortcuts import render
 from django.urls import path, include
 
+from apps.list_manager.forms import LanguageForm
+
 
 def index_view(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'language_form': LanguageForm()})
 
 
 list_manager_patterns = ([
@@ -33,4 +35,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include(list_manager_patterns)),
     url(r'^$', index_view, name='index'),
+    url(r'^i18n/', include('django.conf.urls.i18n'), name='i18n'),
 ]

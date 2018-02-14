@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 from django.views.generic.list import ListView
 
-from .forms import SearchForm, ChoicesForm, ThumbnailImagesChoicesForm
+from .forms import SearchForm, ChoicesForm, ThumbnailImagesChoicesForm, LanguageForm
 from .models import WatchList
 from .helpers import retrieve_movies_choices_list_from_tmdb_api_results
 
@@ -27,7 +27,8 @@ def tmdb_search_view(request):
     elif request.method == 'GET':
         context = {'form': SearchForm(),
                    'choices_form': ChoicesForm(),
-                   'thumbnail_img_choices_form': ThumbnailImagesChoicesForm()}
+                   'thumbnail_img_choices_form': ThumbnailImagesChoicesForm(),
+                   'language_form': LanguageForm()}
         return render(request, 'list_manager/movie_search.html', context)
     else:
         return HttpResponse(
@@ -67,9 +68,18 @@ def marker_view(request):
 class WatchListView(ListView):
     model = WatchList
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['language_form'] = LanguageForm()
+        return context
+
 
 class WatchListDeleteView(DeleteView):
     template_name_suffix = '_check_delete'
     model = WatchList
     success_url = reverse_lazy('list_manager:manager_list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['language_form'] = LanguageForm()
+        return context

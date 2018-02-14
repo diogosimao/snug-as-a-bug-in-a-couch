@@ -42,7 +42,11 @@
                     {% bootstrap_field form.filters_choices %}
                     {% bootstrap_field form.search %}
 
-                    {% bootstrap_button "Query TMDB" button_type="submit" button_class="btn-primary btn-custom" icon="search" %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary btn-custom">
+                        {% bootstrap_icon "search" %} {% trans 'Query tmdb.org' %}
+                        </button>
+                    {% endbuttons %}
                 </form>
                     {% bootstrap_form_errors form layout='inline' %}
 
@@ -57,8 +61,18 @@
                     {% csrf_token %}
                     {% bootstrap_form choices_form %}
 
-                    {% bootstrap_button "Seen" button_type="submit" value="seen" button_class="btn-primary" icon="check" %}
-                    {% bootstrap_button "Wanna see" button_type="submit" value="wannasee" button_class="btn-primary" icon="list" %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary btn-custom" value="seen">
+                        {% bootstrap_icon "check" %} {% trans 'Seen' %}
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-custom" value="wannasee">
+                        {% bootstrap_icon "list" %} {% trans 'Wanna see' %}
+                        </button>                        
+                    {% endbuttons %}
+
+                    {% buttons %}
+
+                    {% endbuttons %}
                 </form>
                     {% bootstrap_form_errors form layout='inline' %}
 
