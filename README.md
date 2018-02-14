@@ -6,7 +6,7 @@ yet another watchlist manager
 [![Build Status](https://travis-ci.org/diogosimao/snug-as-a-bug-in-a-couch.svg?branch=master)](https://travis-ci.org/diogosimao/snug-as-a-bug-in-a-couch)
 [![Coverage Status](https://coveralls.io/repos/github/diogosimao/snug-as-a-bug-in-a-couch/badge.svg?branch=master)](https://coveralls.io/github/diogosimao/snug-as-a-bug-in-a-couch?branch=master)
 [![Code Health](https://landscape.io/github/diogosimao/snug-as-a-bug-in-a-couch/master/landscape.svg?style=flat)](https://landscape.io/github/diogosimao/snug-as-a-bug-in-a-couch/master)
-
+[![Requirements Status](https://requires.io/github/diogosimao/snug-as-a-bug-in-a-couch/requirements.svg?branch=master)](https://requires.io/github/diogosimao/snug-as-a-bug-in-a-couch/requirements/?branch=master)
 
 Stack
 =============
