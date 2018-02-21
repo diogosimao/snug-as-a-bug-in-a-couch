@@ -24,7 +24,7 @@ Docker setup requirements
 =============================
 
 * Docker CE (lastest) installed
-    * Installation    
+    * Installation
         * Docker, see [here](https://docs.docker.com/installation/)
     
     * Used Docker images:
@@ -55,3 +55,7 @@ Hosted on Heroku
 ================
 
 [Link](http://snugasabuginacouch.herokuapp.com/)
+
+Acknowledgments
+=============
+[Leon Revill](https://blog.revillweb.com/bootstrap-tutorial-a-responsive-design-tutorial-with-twitter-bootstrap-3-cb6445c1e586)
